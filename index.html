@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/main.css">
+	<title>Прогноз погоды</title>
+</head>
+<body>
+<div class="preloader">
+	<div class="spinner-box">
+		<div class="blue-orbit leo">
+		</div>
+		<div class="violet-orbit leo">
+		</div>
+		<div class="orange-orbit leo">
+		</div>
+		<div class="red-orbit w1 leo">
+		</div>
+		<div class="red-orbit w2 leo">
+		</div>
+		<div class="red-orbit w3 leo">
+		</div>
+	</div>
+</div>
+<div class="container hide">
+	<header>
+		<div class="row">
+			<div class="col-md-8">
+				<h1>Просто о погоде</h1>
+			</div>
+			<div class="col-md-4">
+				<div class="search" id="search">
+					<input type="search" id="autocomplete" value="">
+					<span class="icon">
+          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+					  <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+					  <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+					</svg>
+      </span>
+				</div>
+			</div>
+		</div>
+	</header>
+	<nav>
+		<div class="nav nav-tabs" id="nav-tab" role="tablist">
+			<a class="nav-link active" id="nav-today-tab" data-toggle="tab" href="#nav-today" role="tab" aria-controls="nav-today" aria-selected="true">Сегодня</a>
+			<a class="nav-link" id="nav-five-day-forecast-tab" data-toggle="tab" href="#nav-five-day-forecast" role="tab"
+			   aria-controls="nav-five-day-forecast" aria-selected="false">5-ти дневный прогноз</a>
+		</div>
+	</nav>
+	<div class="tab-content" id="nav-tabContent">
+		<div class="tab-pane fade show active" id="nav-today" role="tabpanel" aria-labelledby="nav-today-tab">
+			<section id="current-weather">
+				<div class="row">
+					<div class="col-md-3">
+						<h2>Сейчас</h2>
+					</div>
+					<div class="col-md-3">
+						<span class="date"></span>
+					</div>
+				</div>
+				<div id="rightNow-weather" class="row">
+				</div>
+			</section>
+			<section class="hourly">
+				<div class="row">
+					<div class="col-12">
+						<h2>Сегодня</h2>
+					</div>
+				</div>
+				<div class="row">
+					<div class="hourly-today col-12">
+						<table>
+							<tr class="hourly-today-hour">
+							</tr>
+							<tr class="hourly-today-icon">
+							</tr>
+							<tr class="hourly-today-description">
+							</tr>
+							<tr class="hourly-today-temp">
+							</tr>
+							<tr class="hourly-today-feel">
+							</tr>
+							<tr class="hourly-today-wind">
+							</tr>
+							<tr class="hourly-today-degrees">
+							</tr>
+							<tr class="hourly-today-wind_gust">
+							</tr>
+							<tr class="hourly-today-dew_point">
+							</tr>
+							<tr class="hourly-today-humidity">
+							</tr>
+							<tr class="hourly-today-pressure">
+							</tr>
+							<tr class="hourly-today-visibility">
+							</tr>
+						</table>
+					</div>
+				</div>
+			</section>
+		</div>
+		<div class="tab-pane fade" id="nav-five-day-forecast" role="tabpanel" aria-labelledby="nav-five-day-forecast-tab">
+			<ul class="nav nav-pills" id="pills-tab" role="tablist">
+				<li class="nav-item day1" role="presentation">
+					<a class="nav-link active" id="pills-first-tab" data-toggle="pill" href="#pills-first" role="tab" aria-controls="pills-first"
+					   aria-selected="true">
+            <span class="forecast-day-block">
+              <h3>today</h3>
+              <span class="forecast-day-date">JUN 30</span>
+              <span class="forecast-day-icon">Icon</span>
+              <span class="forecast-day-temperature"><span><sup>o</sup>C</span> </span>
+              <span class="forecast-day-description">Clear, Warm</span>
+          </span>
+					</a>
+				</li>
+				<li class="nav-item day2" role="presentation">
+					<a class="nav-link" id="pills-second-tab" data-toggle="pill" href="#pills-second" role="tab" aria-controls="pills-second"
+					   aria-selected="false">
+            <span class="forecast-day-block">
+              <h3>today</h3>
+              <span class="forecast-day-date">JUN 30</span>
+              <span class="forecast-day-icon">Icon</span>
+              <span class="forecast-day-temperature"><span><sup>o</sup>C</span> </span>
+              <span class="forecast-day-description">Clear, Warm</span>
+          </span>
+					</a>
+				</li>
+				<li class="nav-item day3" role="presentation">
+					<a class="nav-link" id="pills-third-tab" data-toggle="pill" href="#pills-third" role="tab" aria-controls="pills-third"
+					   aria-selected="false">
+            <span class="forecast-day-block">
+              <h3>today</h3>
+              <span class="forecast-day-date">JUN 30</span>
+              <span class="forecast-day-icon">Icon</span>
+              <span class="forecast-day-temperature"><span><sup>o</sup>C</span> </span>
+              <span class="forecast-day-description">Clear, Warm</span>
+          </span>
+					</a>
+				</li>
+				<li class="nav-item day4" role="presentation">
+					<a class="nav-link" id="pills-forth-tab" data-toggle="pill" href="#pills-forth" role="tab" aria-controls="pills-forth"
+					   aria-selected="false">
+            <span class="forecast-day-block">
+              <h3>today</h3>
+              <span class="forecast-day-date">JUN 30</span>
+              <span class="forecast-day-icon">Icon</span>
+              <span class="forecast-day-temperature"><span><sup>o</sup>C</span> </span>
+              <span class="forecast-day-description">Clear, Warm</span>
+          </span>
+					</a>
+				</li>
+				<li class="nav-item day5" role="presentation">
+					<a class="nav-link" id="pills-fifth-tab" data-toggle="pill" href="#pills-fifth" role="tab" aria-controls="pills-fifth"
+					   aria-selected="false">
+            <span class="forecast-day-block">
+              <h3>today</h3>
+              <span class="forecast-day-date">JUN 30</span>
+              <span class="forecast-day-icon">Icon</span>
+              <span class="forecast-day-temperature"><span><sup>o</sup>C</span> </span>
+              <span class="forecast-day-description">Clear, Warm</span>
+          </span>
+					</a>
+				</li>
+			</ul>
+			<div class="tab-content" id="pills-tabContent">
+				<div class="tab-pane fade show active" id="pills-first" role="tabpanel" aria-labelledby="pills-first-tab">
+					<section class="day1 hourly">
+						<div class="row">
+							<div class="col-12">
+								<h2>Почасовой</h2>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-12 hourly-day-forecast">
+								<table>
+									<tr class="hourly-today-hour">
+									</tr>
+									<tr class="hourly-today-icon">
+									</tr>
+									<tr class="hourly-today-description">
+									</tr>
+									<tr class="hourly-today-temp">
+									</tr>
+									<tr class="hourly-today-feel">
+									</tr>
+									<tr class="hourly-today-wind">
+									</tr>
+									<tr class="hourly-today-degrees">
+									</tr>
+									<tr class="hourly-today-wind_gust">
+									</tr>
+									<tr class="hourly-today-humidity">
+									</tr>
+									<tr class="hourly-today-pressure">
+									</tr>
+									<tr class="hourly-today-visibility">
+									</tr>
+								</table>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="tab-pane fade" id="pills-second" role="tabpanel" aria-labelledby="pills-second-tab">
+					<section class="day2 hourly">
+						<div class="row">
+							<div class="col-12">
+								<h2>Почасовой</h2>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-12 hourly-day-forecast">
+								<table>
+									<tr class="hourly-today-hour">
+									</tr>
+									<tr class="hourly-today-icon">
+									</tr>
+									<tr class="hourly-today-description">
+									</tr>
+									<tr class="hourly-today-temp">
+									</tr>
+									<tr class="hourly-today-feel">
+									</tr>
+									<tr class="hourly-today-wind">
+									</tr>
+									<tr class="hourly-today-degrees">
+									</tr>
+									<tr class="hourly-today-wind_gust">
+									</tr>
+									<tr class="hourly-today-humidity">
+									</tr>
+									<tr class="hourly-today-pressure">
+									</tr>
+									<tr class="hourly-today-visibility">
+									</tr>
+								</table>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="tab-pane fade" id="pills-third" role="tabpanel" aria-labelledby="pills-third-tab">
+					<section class="day3 hourly">
+						<div class="row">
+							<div class="col-12">
+								<h2>Почасовой</h2>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-12 hourly-day-forecast">
+								<table>
+									<tr class="hourly-today-hour">
+									</tr>
+									<tr class="hourly-today-icon">
+									</tr>
+									<tr class="hourly-today-description">
+									</tr>
+									<tr class="hourly-today-temp">
+									</tr>
+									<tr class="hourly-today-feel">
+									</tr>
+									<tr class="hourly-today-wind">
+									</tr>
+									<tr class="hourly-today-degrees">
+									</tr>
+									<tr class="hourly-today-wind_gust">
+									</tr>
+									<tr class="hourly-today-humidity">
+									</tr>
+									<tr class="hourly-today-pressure">
+									</tr>
+									<tr class="hourly-today-visibility">
+									</tr>
+								</table>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="tab-pane fade" id="pills-forth" role="tabpanel" aria-labelledby="pills-forth-tab">
+					<section class="day4 hourly">
+						<div class="row">
+							<div class="col-12">
+								<h2>Почасовой</h2>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-12 hourly-day-forecast">
+								<table>
+									<tr class="hourly-today-hour">
+									</tr>
+									<tr class="hourly-today-icon">
+									</tr>
+									<tr class="hourly-today-description">
+									</tr>
+									<tr class="hourly-today-temp">
+									</tr>
+									<tr class="hourly-today-feel">
+									</tr>
+									<tr class="hourly-today-wind">
+									</tr>
+									<tr class="hourly-today-degrees">
+									</tr>
+									<tr class="hourly-today-wind_gust">
+									</tr>
+									<tr class="hourly-today-humidity">
+									</tr>
+									<tr class="hourly-today-pressure">
+									</tr>
+									<tr class="hourly-today-visibility">
+									</tr>
+								</table>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="tab-pane fade" id="pills-fifth" role="tabpanel" aria-labelledby="pills-fifth-tab">
+					<section class="day5 hourly">
+						<div class="row">
+							<div class="col-12">
+								<h2>Почасовой</h2>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-12 hourly-day-forecast">
+								<table>
+									<tr class="hourly-today-hour">
+									</tr>
+									<tr class="hourly-today-icon">
+									</tr>
+									<tr class="hourly-today-description">
+									</tr>
+									<tr class="hourly-today-temp">
+									</tr>
+									<tr class="hourly-today-feel">
+									</tr>
+									<tr class="hourly-today-wind">
+									</tr>
+									<tr class="hourly-today-degrees">
+									</tr>
+									<tr class="hourly-today-wind_gust">
+									</tr>
+									<tr class="hourly-today-humidity">
+									</tr>
+									<tr class="hourly-today-pressure">
+									</tr>
+									<tr class="hourly-today-visibility">
+									</tr>
+								</table>
+							</div>
+						</div>
+					</section>
+				</div>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div id="map"></div>
+	</section>
+</div>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
