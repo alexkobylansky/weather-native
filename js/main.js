@@ -4,13 +4,13 @@ document.addEventListener('DOMContentLoaded', () => {
     return {
       lat: lat,
       lon: lon,
-      units: "metric",
-      lang: "ru",
-      appid: "2e3f0a4de66d0bcd26974266f439e301"
+      units: 'metric',
+      lang: 'ru',
+      appid: '2e3f0a4de66d0bcd26974266f439e301'
     };
   }
 
-  const baseURL = "https://api.openweathermap.org/data";
+  const baseURL = 'https://api.openweathermap.org/data';
 
   const day = new Date();
   let getDay = time => new Date(time);
@@ -78,8 +78,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let hours = Math.floor((different % 86400) / 3600)
     let minutes = Math.ceil(((different % 86400) % 3600) / 60);
     if (minutes === 60) minutes -= 1;
-    hours = (hours < 10) ? "0" + hours : hours;
-    minutes = (minutes < 10) ? "0" + minutes : minutes;
+    hours = (hours < 10) ? '0' + hours : hours;
+    minutes = (minutes < 10) ? '0' + minutes : minutes;
     return `${hours} ч ${minutes} мин`;
   }
 
@@ -111,8 +111,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const center = {lat: lat, lng: lon};
 
     const [{ Map }, { AdvancedMarkerElement }] = await Promise.all([
-      google.maps.importLibrary("maps"),
-      google.maps.importLibrary("marker")
+      google.maps.importLibrary('maps'),
+      google.maps.importLibrary('marker')
     ]);
 
     const map = await new Map(document.getElementById('map'), {
@@ -136,12 +136,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const infoWindow = await new google.maps.InfoWindow({});
 
-    const locationButton = document.createElement("button");
+    const locationButton = document.createElement('button');
 
-    locationButton.textContent = "Ваше местоположение";
-    locationButton.classList.add("custom-map-control-button");
+    locationButton.textContent = 'Ваше местоположение';
+    locationButton.classList.add('custom-map-control-button');
     map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
-    locationButton.addEventListener("click", () => {
+    locationButton.addEventListener('click', () => {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           (position) => {
@@ -166,8 +166,8 @@ document.addEventListener('DOMContentLoaded', () => {
         infoWindow.setPosition(pos);
         infoWindow.setContent(
           browserHasGeolocation
-            ? "Ошибка: В вашем браузере отключена геолокация"
-            : "Ошибка: Ваш браузер не поддерживает службу геолокации"
+            ? 'Ошибка: В вашем браузере отключена геолокация'
+            : 'Ошибка: Ваш браузер не поддерживает службу геолокации'
         );
         infoWindow.open(map);
       }
@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const placeAutocomplete = await new google.maps.places.PlaceAutocompleteElement();
     placeAutocomplete.id = 'place-autocomplete-input';
-    const wrap = document.getElementById("search");
+    const wrap = document.getElementById('search');
     wrap.appendChild(placeAutocomplete);
 
     placeAutocomplete.addEventListener('gmp-select', async ({ placePrediction }) => {
@@ -193,7 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const lat = place.location.lat();
       const lon = place.location.lng();
       void getCity(lat, lon);
-      console.log("placeAutocomplete: ", placeAutocomplete);
+      console.log('placeAutocomplete: ', placeAutocomplete);
     });
 
     async function getCity(lat, lon) {
@@ -250,25 +250,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     createIcon();
-    const block = document.querySelector(".cityName");
-    block.querySelector("h2").innerHTML = `${name} Сейчас`;
+    const block = document.querySelector('.cityName');
+    block.querySelector('h2').innerHTML = `${name} Сейчас`;
 
     document.getElementById('rightNow-weather').innerHTML = (`
-          <div class="col-md-8 current-weather-wrapp row">
-            <div class="col-4 current-weather-description row">
-              <div class="icon"><img src='https://openweathermap.org/img/wn/${weather[0]['icon']}@2x.png' alt="icon"/></div>
-              <span class="description">${weather[0]["description"]}</span>
+          <div class='col-md-8 current-weather-wrapp row'>
+            <div class='col-4 current-weather-description row'>
+              <div class='icon'><img src='https://openweathermap.org/img/wn/${weather[0]['icon']}@2x.png' alt='icon'/></div>
+              <span class='description'>${weather[0]['description']}</span>
             </div>
-            <div class="col-8 current-weather-temperature row">
-              <span class="temperature">${Math.round(main['temp'])}&deg;C</span>
-              <span class="feel">Ощущается как ${Math.round(main['feels_like'])}&deg;C</span>
+            <div class='col-8 current-weather-temperature row'>
+              <span class='temperature'>${Math.round(main['temp'])}&deg;C</span>
+              <span class='feel'>Ощущается как ${Math.round(main['feels_like'])}&deg;C</span>
             </div>
           </div>
-          <div class="col-md-4 current-weather-duration row">
-              <span class="sunrise">Восход: ${timestampConversation(sys['sunrise'])}</span>
-              <span class="sunset">Закат: ${timestampConversation(sys['sunset'])}</span>
-              <span class="duration">Продолжительность дня: ${getDuration(sys['sunrise'], sys['sunset'])}</span>
-              <span class="visibility">Видимость: ${(visibility / 1000)}км</span>
+          <div class='col-md-4 current-weather-duration row'>
+              <span class='sunrise'>Восход: ${timestampConversation(sys['sunrise'])}</span>
+              <span class='sunset'>Закат: ${timestampConversation(sys['sunset'])}</span>
+              <span class='duration'>Продолжительность дня: ${getDuration(sys['sunrise'], sys['sunset'])}</span>
+              <span class='visibility'>Видимость: ${(visibility / 1000)}км</span>
           </div>`)
 
     document.querySelector('#current-weather .date').textContent = (`${getFullDay()}`);
@@ -309,34 +309,38 @@ document.addEventListener('DOMContentLoaded', () => {
       document.querySelector(`section.day${i} .hourly-today-visibility`).innerHTML = '<th>Видимость (км)</th>';
     }
 
-    /*let trunc = (t) => Math.trunc(t / 1000);
-    const endToday = day.setHours(23, 0, 0);
-    let start = [] ;
-    let end = [];
-    for(let i =0; i < 5; i++){
-      let value =  i === 0 ? endToday : start[i - 1] * 1000 ;
-      start[i] = trunc(value + 10800000);
-      end[i] = trunc(value + 86400000);
-    }
+    let trunc1 = (t) => Math.trunc(t / 1000);
+      const endToday1 = day.setHours(23, 0, 0);
 
-    for (let i = 0; i < list.length; i++) {
-      if (list[i]['dt'] >= start[i] && list[i]['dt'] <= end[i]) {
-        for (let j = 1; j <= 5; j++) {
-          document.querySelector(`section.day${j} .hourly-today-hour`).innerHTML += `<td>${timestampConversation(list[i]['dt'])}</td>`;
-          document.querySelector(`section.day${j} .hourly-today-icon`).innerHTML += `<td><img src='https://openweathermap.org/img/wn/${list[i]['weather'][0]['icon']}@2x.png' alt="icon"/></td>`;
-          document.querySelector(`section.day${j} .hourly-today-description`).innerHTML += `<td>${list[i]['weather'][0]['description']}</td>`;
-          document.querySelector(`section.day${j} .hourly-today-temp`).innerHTML += `<td>${Math.round(list[i]['main']['temp'])}&deg;</td>`;
-          document.querySelector(`section.day${j} .hourly-today-feel`).innerHTML += `<td>${Math.round(list[i]['main']['feels_like'])}&deg;</td>`;
-          document.querySelector(`section.day${j} .hourly-today-wind`).innerHTML += `<td>${Math.round(list[i]['wind']['speed'])}</td>`;
-          document.querySelector(`section.day${j} .hourly-today-degrees`).innerHTML += `<td>${windDeg(list[i]['wind']['deg'])}</td>`;
-          document.querySelector(`section.day${j} .hourly-today-wind_gust`).innerHTML += `<td>${list[i]['wind']['gust']}</td>`;
-          document.querySelector(`section.day${j} .hourly-today-humidity`).innerHTML += `<td>${list[i]['main']['humidity']}%</td>`;
-          document.querySelector(`section.day${j} .hourly-today-pressure`).innerHTML += `<td>${Math.floor((list[i]['main']['pressure'] * 0.75006156) * 100) / 100}</td>`;
-          document.querySelector(`section.day${j} .hourly-today-visibility`).innerHTML += `<td>${list[i]['visibility'] / 1000}</td>`;
-        }
+      const days1 = [];
+      let prevEnd = endToday1;
+
+      for (let i = 1; i <= 5; i++) {
+        const start = trunc1(prevEnd + 3 * 60 * 60 * 1000);      // +3 часа
+        const end = trunc1(prevEnd + 24 * 60 * 60 * 1000);       // +24 часа
+        days1.push({ start, end });
+        prevEnd = end * 1000;  // обратно в миллисекунды
       }
-    }
-  }*/
+    console.log('days1: ', days1);
+    /*
+        for (let i = 0; i < list.length; i++) {
+          if (list[i]['dt'] >= start[i] && list[i]['dt'] <= end[i]) {
+            for (let j = 1; j <= 5; j++) {
+              document.querySelector(`section.day${j} .hourly-today-hour`).innerHTML += `<td>${timestampConversation(list[i]['dt'])}</td>`;
+              document.querySelector(`section.day${j} .hourly-today-icon`).innerHTML += `<td><img src='https://openweathermap.org/img/wn/${list[i]['weather'][0]['icon']}@2x.png' alt='icon'/></td>`;
+              document.querySelector(`section.day${j} .hourly-today-description`).innerHTML += `<td>${list[i]['weather'][0]['description']}</td>`;
+              document.querySelector(`section.day${j} .hourly-today-temp`).innerHTML += `<td>${Math.round(list[i]['main']['temp'])}&deg;</td>`;
+              document.querySelector(`section.day${j} .hourly-today-feel`).innerHTML += `<td>${Math.round(list[i]['main']['feels_like'])}&deg;</td>`;
+              document.querySelector(`section.day${j} .hourly-today-wind`).innerHTML += `<td>${Math.round(list[i]['wind']['speed'])}</td>`;
+              document.querySelector(`section.day${j} .hourly-today-degrees`).innerHTML += `<td>${windDeg(list[i]['wind']['deg'])}</td>`;
+              document.querySelector(`section.day${j} .hourly-today-wind_gust`).innerHTML += `<td>${list[i]['wind']['gust']}</td>`;
+              document.querySelector(`section.day${j} .hourly-today-humidity`).innerHTML += `<td>${list[i]['main']['humidity']}%</td>`;
+              document.querySelector(`section.day${j} .hourly-today-pressure`).innerHTML += `<td>${Math.floor((list[i]['main']['pressure'] * 0.75006156) * 100) / 100}</td>`;
+              document.querySelector(`section.day${j} .hourly-today-visibility`).innerHTML += `<td>${list[i]['visibility'] / 1000}</td>`;
+            }
+          }
+        }
+      }*/
 
     let trunc = (t) => Math.trunc(t / 1000);
     const endToday = day.setHours(23, 0, 0);
@@ -355,7 +359,7 @@ document.addEventListener('DOMContentLoaded', () => {
     for (let i = 0; i < list.length; i++) {
       if (list[i]['dt'] >= startDay1 && list[i]['dt'] <= endDay1) {
         document.querySelector(`section.day1 .hourly-today-hour`).innerHTML += `<td>${timestampConversation(list[i]['dt'])}</td>`;
-        document.querySelector(`section.day1 .hourly-today-icon`).innerHTML += `<td><img src='https://openweathermap.org/img/wn/${list[i]['weather'][0]['icon']}@2x.png' alt="icon"/></td>`;
+        document.querySelector(`section.day1 .hourly-today-icon`).innerHTML += `<td><img src='https://openweathermap.org/img/wn/${list[i]['weather'][0]['icon']}@2x.png' alt='icon'/></td>`;
         document.querySelector(`section.day1 .hourly-today-description`).innerHTML += `<td>${list[i]['weather'][0]['description']}</td>`;
         document.querySelector(`section.day1 .hourly-today-temp`).innerHTML += `<td>${Math.round(list[i]['main']['temp'])}&deg;</td>`;
         document.querySelector(`section.day1 .hourly-today-feel`).innerHTML += `<td>${Math.round(list[i]['main']['feels_like'])}&deg;</td>`;
@@ -367,7 +371,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector(`section.day1 .hourly-today-visibility`).innerHTML += `<td>${list[i]['visibility'] / 1000}</td>`;
       } else if (list[i]['dt'] >= startDay2 && list[i]['dt'] <= endDay2) {
         document.querySelector(`section.day2 .hourly-today-hour`).innerHTML += `<td>${timestampConversation(list[i]['dt'])}</td>`;
-        document.querySelector(`section.day2 .hourly-today-icon`).innerHTML += `<td><img src='https://openweathermap.org/img/wn/${list[i]['weather'][0]['icon']}@2x.png' alt="icon"/></td>`;
+        document.querySelector(`section.day2 .hourly-today-icon`).innerHTML += `<td><img src='https://openweathermap.org/img/wn/${list[i]['weather'][0]['icon']}@2x.png' alt='icon'/></td>`;
         document.querySelector(`section.day2 .hourly-today-description`).innerHTML += `<td>${list[i]['weather'][0]['description']}</td>`;
         document.querySelector(`section.day2 .hourly-today-temp`).innerHTML += `<td>${Math.round(list[i]['main']['temp'])}&deg;</td>`;
         document.querySelector(`section.day2 .hourly-today-feel`).innerHTML += `<td>${Math.round(list[i]['main']['feels_like'])}&deg;</td>`;
@@ -379,7 +383,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector(`section.day2 .hourly-today-visibility`).innerHTML += `<td>${list[i]['visibility'] / 1000}</td>`;
       } else if (list[i]['dt'] >= startDay3 && list[i]['dt'] <= endDay3) {
         document.querySelector(`section.day3 .hourly-today-hour`).innerHTML += `<td>${timestampConversation(list[i]['dt'])}</td>`;
-        document.querySelector(`section.day3 .hourly-today-icon`).innerHTML += `<td><img src='https://openweathermap.org/img/wn/${list[i]['weather'][0]['icon']}@2x.png' alt="icon"/></td>`;
+        document.querySelector(`section.day3 .hourly-today-icon`).innerHTML += `<td><img src='https://openweathermap.org/img/wn/${list[i]['weather'][0]['icon']}@2x.png' alt='icon'/></td>`;
         document.querySelector(`section.day3 .hourly-today-description`).innerHTML += `<td>${list[i]['weather'][0]['description']}</td>`;
         document.querySelector(`section.day3 .hourly-today-temp`).innerHTML += `<td>${Math.round(list[i]['main']['temp'])}&deg;</td>`;
         document.querySelector(`section.day3 .hourly-today-feel`).innerHTML += `<td>${Math.round(list[i]['main']['feels_like'])}&deg;</td>`;
@@ -391,7 +395,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector(`section.day3 .hourly-today-visibility`).innerHTML += `<td>${list[i]['visibility'] / 1000}</td>`;
       } else if (list[i]['dt'] >= startDay4 && list[i]['dt'] <= endDay4) {
         document.querySelector(`section.day4 .hourly-today-hour`).innerHTML += `<td>${timestampConversation(list[i]['dt'])}</td>`;
-        document.querySelector(`section.day4 .hourly-today-icon`).innerHTML += `<td><img src='https://openweathermap.org/img/wn/${list[i]['weather'][0]['icon']}@2x.png' alt="icon"/></td>`;
+        document.querySelector(`section.day4 .hourly-today-icon`).innerHTML += `<td><img src='https://openweathermap.org/img/wn/${list[i]['weather'][0]['icon']}@2x.png' alt='icon'/></td>`;
         document.querySelector(`section.day4 .hourly-today-description`).innerHTML += `<td>${list[i]['weather'][0]['description']}</td>`;
         document.querySelector(`section.day4 .hourly-today-temp`).innerHTML += `<td>${Math.round(list[i]['main']['temp'])}&deg;</td>`;
         document.querySelector(`section.day4 .hourly-today-feel`).innerHTML += `<td>${Math.round(list[i]['main']['feels_like'])}&deg;</td>`;
@@ -403,7 +407,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector(`section.day4 .hourly-today-visibility`).innerHTML += `<td>${list[i]['visibility'] / 1000}</td>`;
       } else if (list[i]['dt'] >= startDay5 && list[i]['dt'] <= endDay5) {
         document.querySelector(`section.day5 .hourly-today-hour`).innerHTML += `<td>${timestampConversation(list[i]['dt'])}</td>`;
-        document.querySelector(`section.day5 .hourly-today-icon`).innerHTML += `<td><img src='https://openweathermap.org/img/wn/${list[i]['weather'][0]['icon']}@2x.png' alt="icon"/></td>`;
+        document.querySelector(`section.day5 .hourly-today-icon`).innerHTML += `<td><img src='https://openweathermap.org/img/wn/${list[i]['weather'][0]['icon']}@2x.png' alt='icon'/></td>`;
         document.querySelector(`section.day5 .hourly-today-description`).innerHTML += `<td>${list[i]['weather'][0]['description']}</td>`;
         document.querySelector(`section.day5 .hourly-today-temp`).innerHTML += `<td>${Math.round(list[i]['main']['temp'])}&deg;</td>`;
         document.querySelector(`section.day5 .hourly-today-feel`).innerHTML += `<td>${Math.round(list[i]['main']['feels_like'])}&deg;</td>`;
@@ -422,7 +426,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const params = createParams(lat, lon);
     const paramsWithExclude = new URLSearchParams({
       ...params,
-      exclude: "current,minutely,alerts"
+      exclude: 'current,minutely,alerts'
     });
     const url = `${baseURL}/3.0/onecall?${paramsWithExclude}`;
 
@@ -462,7 +466,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     for (let i = 0; i < hourly.length; i++) {
       document.querySelector('.hourly .hourly-today-hour').innerHTML += `<td>${timestampConversation(hourly[i]['dt'])}</td>`;
-      document.querySelector('.hourly .hourly-today-icon').innerHTML += `<td><img src='https://openweathermap.org/img/wn/${hourly[i]['weather'][0]['icon']}@2x.png' alt="icon"/></td>`;
+      document.querySelector('.hourly .hourly-today-icon').innerHTML += `<td><img src='https://openweathermap.org/img/wn/${hourly[i]['weather'][0]['icon']}@2x.png' alt='icon'/></td>`;
       document.querySelector('.hourly .hourly-today-description').innerHTML += `<td>${hourly[i]['weather'][0]['description']}</td>`;
       document.querySelector('.hourly .hourly-today-temp').innerHTML += `<td>${Math.round(hourly[i]['temp'])}&deg;</td>`;
       document.querySelector('.hourly .hourly-today-feel').innerHTML += `<td>${Math.round(hourly[i]['feels_like'])}&deg;</td>`;
@@ -482,7 +486,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       document.querySelector(`li.day${i} h3`).innerHTML = `${dayRu[getDay(daily[i]['dt'] * 1000).getDay()]}`;
       document.querySelector(`li.day${i} .forecast-day-date`).innerHTML = `${monthsRus[todayMM]} ${todayDD}`;
-      document.querySelector(`li.day${i} .forecast-day-icon`).innerHTML = `<img src='https://openweathermap.org/img/wn/${daily[i]['weather']['0']['icon']}@2x.png' alt="icon"/>`;
+      document.querySelector(`li.day${i} .forecast-day-icon`).innerHTML = `<img src='https://openweathermap.org/img/wn/${daily[i]['weather']['0']['icon']}@2x.png' alt='icon'/>`;
       document.querySelector(`li.day${i} .forecast-day-temperature`).innerHTML = `${Math.floor(daily[i]['temp']['max'])}&deg;C`;
       document.querySelector(`li.day${i} .forecast-day-description`).innerHTML = `${daily[i]['weather'][0]['description']}`
     }
