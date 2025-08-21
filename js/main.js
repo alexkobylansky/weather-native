@@ -196,7 +196,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const lat = place.location.lat();
       const lon = place.location.lng();
       void getCity(lat, lon);
-      console.log('placeAutocomplete: ', placeAutocomplete);
     });
 
     async function getCity(lat, lon) {
