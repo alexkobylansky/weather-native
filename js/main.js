@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
   async function initMap(lat, lon) {
     const center = {lat: lat, lng: lon};
 
-    const [{ Map }, { AdvancedMarkerElement }] = await Promise.all([
+    const [{Map}, {AdvancedMarkerElement}] = await Promise.all([
       google.maps.importLibrary('maps'),
       google.maps.importLibrary('marker')
     ]);
@@ -178,15 +178,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const wrap = document.getElementById('search');
     wrap.appendChild(placeAutocomplete);
 
-    placeAutocomplete.addEventListener('gmp-select', async ({ placePrediction }) => {
+    placeAutocomplete.addEventListener('gmp-select', async ({placePrediction}) => {
       showPreloader();
       const place = placePrediction.toPlace();
-      await place.fetchFields({ fields: ['location'] });
+      await place.fetchFields({fields: ['location']});
       // If the place has a geometry, then present it on a map.
       if (place.viewport) {
         map.fitBounds(place.viewport);
-      }
-      else {
+      } else {
         map.setCenter(place.location);
       }
       marker.position = place.location;
@@ -418,7 +417,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector(`section.day5 .hourly-today-pressure`).innerHTML += `<td>${Math.floor((list[i]['main']['pressure'] * 0.75006156) * 100) / 100}</td>`;
         document.querySelector(`section.day5 .hourly-today-visibility`).innerHTML += `<td>${list[i]['visibility'] / 1000}</td>`;
       }
-
     }
   }
 
