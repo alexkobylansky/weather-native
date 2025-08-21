@@ -176,7 +176,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const placeAutocomplete = await new PlaceAutocompleteElement();
     placeAutocomplete.id = 'place-autocomplete-input';
     const wrap = document.getElementById('search');
-    wrap.appendChild(placeAutocomplete);
+    const gmpPlaceAutocomplete = document.getElementById('place-autocomplete-input');
+
+    if (!gmpPlaceAutocomplete) {
+      wrap.appendChild(placeAutocomplete);
+    }
 
     placeAutocomplete.addEventListener('gmp-select', async ({placePrediction}) => {
       showPreloader();
