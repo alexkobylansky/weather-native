@@ -222,23 +222,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  function getCurrentWeather(lat, lon) {
-    const url = new URL("https://api.openweathermap.org/data/2.5/weather");
-    const params = {
-      lat: lat,
-      lon: lon,
-      units: "metric",
-      lang: "ru",
-      appid: ""
-    };
+  async function getCurrentWeather(lat, lon) {
+    const params = new URLSearchParams(createParams(lat, lon));
+    const url = `${baseURL}/2.5/weather?${params}`;
 
-    for (let param in params) {
-      url.searchParams.set(param, params[param])
+    try {
+      const response = await fetch(url);
+
+      if (!response.ok) {
+        throw new Error(`HTTP Error: ${response.status}, ${response.statusText}`);
+      }
+
+      const currentWeather = await response.json();
+      renderCurrentWeather(currentWeather);
+    } catch (error) {
+      console.error('Fetch error:', error.message);
+      throw error;
     }
-
-    fetch(url.toString())
-      .then(data => data.json())
-      .then(currentWeather => renderCurrentWeather(currentWeather))
   }
 
   function renderCurrentWeather({weather, main, visibility, sys}) {
