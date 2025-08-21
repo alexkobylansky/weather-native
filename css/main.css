@@ -79,19 +79,6 @@ header .col-md-7 {
 	display: flex;
 	justify-content: flex-end;
 }
-.search {
-	position: relative;
-}
-.search input {
-	width: 300px;
-	padding: 5px 10px 5px 40px;
-}
-.search .icon {
-	position: absolute;
-	left: 23px;
-	top: 50%;
-	transform: translate(-50%, -50%);
-}
 .date {
 	font-size: 1.5rem !important;
 	color: #1F9696;
