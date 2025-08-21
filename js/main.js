@@ -241,7 +241,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  function renderCurrentWeather({weather, main, visibility, sys}) {
+  function renderCurrentWeather({weather, main, visibility, name, sys}) {
     function createIcon() {
       const link = document.createElement('link');
       link.rel = `icon`
@@ -250,6 +250,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     createIcon();
+    const block = document.querySelector(".cityName");
+    block.querySelector("h2").innerHTML = `${name} Сейчас`;
+
     document.getElementById('rightNow-weather').innerHTML = (`
           <div class="col-md-8 current-weather-wrapp row">
             <div class="col-4 current-weather-description row">
