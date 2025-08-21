@@ -75,6 +75,10 @@ h1 {
 	font-size: 2rem !important;
 	color: #1F9696;
 }
+header .col-md-7 {
+	display: flex;
+	justify-content: flex-end;
+}
 .search {
 	position: relative;
 }
