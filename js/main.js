@@ -152,8 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
             };
             getPosition(pos.lat, pos.lng)
             map.setCenter(pos);
-            marker.setPosition(pos);
-            marker.setVisible(true);
+            marker.position = pos;
           },
           () => {
             handleLocationError(true, infoWindow, map.getCenter());
