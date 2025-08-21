@@ -107,27 +107,34 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 1000);
   }
 
-  function showPreloader() {
-    const spinner = document.querySelector('.preloader.hide');
-    const cont = document.querySelector('.container');
-    if (spinner) spinner.classList.remove('hide');
-    cont.classList.add('hide');
-  }
+  async function initMap(lat, lon) {
+    const center = {lat: lat, lng: lon};
 
-  function initMap(lat, lon) {
-    const center = {lat: lat, lng: lon}
-    const map = new google.maps.Map(document.getElementById('map'), {
+    const [{ Map }, { AdvancedMarkerElement }] = await Promise.all([
+      google.maps.importLibrary("maps"),
+      google.maps.importLibrary("marker")
+    ]);
+
+    const map = await new Map(document.getElementById('map'), {
       zoom: 10,
-      center: center
+      center: center,
+      mapTypeControl: false,
+      scaleControl: false,
+      streetViewControl: false,
+      rotateControl: false,
+      fullscreenControl: false,
+      mapId: 'map',
+      zoomControlOptions: {
+        position: google.maps.ControlPosition.RIGHT_CENTER,
+      },
     });
 
-    const marker = new google.maps.Marker({
+    const marker = await new AdvancedMarkerElement({
       map,
       position: center
     });
-    const infoWindow = new google.maps.InfoWindow({
-      content: '',
-    });
+
+    const infoWindow = await new google.maps.InfoWindow({});
 
     const locationButton = document.createElement("button");
 
@@ -166,52 +173,52 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    const autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'));
-    google.maps.event.addListener(autocomplete, 'place_changed', () => {
-      showPreloader()
-      let place = autocomplete.getPlace();
-      marker.setPosition(place.geometry.location);
-      marker.setVisible(true);
-      infoWindow.close();
-      if (!place.geometry) {
-        alert('Error');
-      } else {
-        map.fitBounds(place.geometry.viewport)
-      }
-      marker.setIcon({
-        scaledSize: new google.maps.Size(25, 25)
-      });
-      marker.setPosition(place.geometry.location);
-      marker.setVisible(true);
+    const placeAutocomplete = await new google.maps.places.PlaceAutocompleteElement();
+    placeAutocomplete.id = 'place-autocomplete-input';
+    const wrap = document.getElementById("search");
+    wrap.appendChild(placeAutocomplete);
 
-      const lat = place.geometry.location.lat();
-      const lon = place.geometry.location.lng();
-      getCity(lat, lon)
-      document.getElementById('autocomplete').value = '';
+    placeAutocomplete.addEventListener('gmp-select', async ({ placePrediction }) => {
+      showPreloader();
+      const place = placePrediction.toPlace();
+      await place.fetchFields({ fields: ['location'] });
+      // If the place has a geometry, then present it on a map.
+      if (place.viewport) {
+        map.fitBounds(place.viewport);
+      }
+      else {
+        map.setCenter(place.location);
+      }
+      marker.position = place.location;
+      const lat = place.location.lat();
+      const lon = place.location.lng();
+      void getCity(lat, lon);
+      console.log("placeAutocomplete: ", placeAutocomplete);
     });
 
-    function getCity(lat, lon) {
-      const url = new URL("https://api.openweathermap.org/data/2.5/weather");
-      const params = {
-        lat: lat,
-        lon: lon,
-        units: "metric",
-        lang: "ru",
-        appid: ""
-      };
+    async function getCity(lat, lon) {
+      const params = new URLSearchParams(createParams(lat, lon));
+      const url = `${baseURL}/2.5/weather?${params}`;
 
-      for (let param in params) {
-        url.searchParams.set(param, params[param])
+      try {
+        const response = await fetch(url);
+
+        if (!response.ok) {
+          throw new Error(`HTTP Error: ${response.status}, ${response.statusText}`);
+        }
+
+        const currentWeather = await response.json();
+        const lat = currentWeather.coord.lat;
+        const lon = currentWeather.coord.lon;
+        renderCurrentWeather(currentWeather);
+        void getForecastWeather(lat, lon);
+        void getOneCallAPI(lat, lon);
+      } catch (error) {
+        console.error('Fetch error:', error.message);
+        throw error;
+      } finally {
+        hidePreloader();
       }
-
-      fetch(url.toString())
-        .then(data => data.json())
-        .then(cityName => {
-          renderCurrentWeather(cityName);
-          getForecastWeather(cityName.coord.lat, cityName.coord.lon);
-          getOneCallAPI(cityName.coord.lat, cityName.coord.lon)
-        });
-      hidePreloader();
     }
   }
 
