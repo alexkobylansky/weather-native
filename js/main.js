@@ -91,11 +91,11 @@ document.addEventListener('DOMContentLoaded', () => {
     hidePreloader();
   }
 
-  function loadScript(src, initMap, lat, lon) {
-    let script = document.createElement('script');
-    script.src = src;
-    script.onload = () => initMap(lat, lon)
-    document.head.append(script);
+  function showPreloader() {
+    const spinner = document.querySelector('.preloader.hide');
+    const cont = document.querySelector('.container');
+    if (spinner) spinner.classList.remove('hide');
+    cont.classList.add('hide');
   }
 
   function hidePreloader() {
