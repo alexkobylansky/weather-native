@@ -84,11 +84,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function getPosition(lat, lon) {
-    getCurrentWeather(lat, lon);
-    getForecastWeather(lat, lon);
-    getOneCallAPI(lat, lon);
-    loadScript('https://maps.googleapis.com/maps/api/js?key={key}&libraries=places&callback=initMap', initMap, lat, lon);
-    hidePreloader()
+    void getCurrentWeather(lat, lon);
+    void getForecastWeather(lat, lon);
+    void getOneCallAPI(lat, lon);
+    void initMap(lat, lon);
+    hidePreloader();
   }
 
   function loadScript(src, initMap, lat, lon) {
