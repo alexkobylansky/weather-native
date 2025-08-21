@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const cont = document.querySelector('.container.hide');
     setTimeout(() => {
       spinner.classList.add('hide');
-      if(cont) cont.classList.remove('hide');
+      if (cont) cont.classList.remove('hide');
     }, 1000);
   }
 
