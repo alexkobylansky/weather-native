@@ -274,25 +274,23 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('#current-weather .date').textContent = (`${getFullDay()}`);
   }
 
-  function getForecastWeather(lat, lon) {
-    const url = new URL("https://api.openweathermap.org/data/2.5/forecast");
-    const params = {
-      lat: lat,
-      lon: lon,
-      units: "metric",
-      lang: "ru",
-      appid: ""
-    };
+  async function getForecastWeather(lat, lon) {
+    const params = new URLSearchParams(createParams(lat, lon));
+    const url = `${baseURL}/2.5/forecast?${params}`;
 
-    for (let param in params) {
-      url.searchParams.set(param, params[param])
+    try {
+      const response = await fetch(url);
+
+      if (!response.ok) {
+        throw new Error(`HTTP Error: ${response.status}, ${response.statusText}`);
+      }
+
+      const forecastWeather = await response.json();
+      renderForecastWeather(forecastWeather);
+    } catch (error) {
+      console.error('Fetch error:', error.message);
+      throw error;
     }
-
-    fetch(url.toString())
-      .then(data => data.json())
-      .then(forecastWeather => {
-        renderForecastWeather(forecastWeather)
-      })
   }
 
   function renderForecastWeather({list}) {
