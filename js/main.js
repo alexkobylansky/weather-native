@@ -308,39 +308,6 @@ document.addEventListener('DOMContentLoaded', () => {
       document.querySelector(`section.day${i} .hourly-today-visibility`).innerHTML = '<th>Видимость (км)</th>';
     }
 
-    let trunc1 = (t) => Math.trunc(t / 1000);
-      const endToday1 = day.setHours(23, 0, 0);
-
-      const days1 = [];
-      let prevEnd = endToday1;
-
-      for (let i = 1; i <= 5; i++) {
-        const start = trunc1(prevEnd + 3 * 60 * 60 * 1000);      // +3 часа
-        const end = trunc1(prevEnd + 24 * 60 * 60 * 1000);       // +24 часа
-        days1.push({ start, end });
-        prevEnd = end * 1000;  // обратно в миллисекунды
-      }
-    console.log('days1: ', days1);
-    /*
-        for (let i = 0; i < list.length; i++) {
-          if (list[i]['dt'] >= start[i] && list[i]['dt'] <= end[i]) {
-            for (let j = 1; j <= 5; j++) {
-              document.querySelector(`section.day${j} .hourly-today-hour`).innerHTML += `<td>${timestampConversation(list[i]['dt'])}</td>`;
-              document.querySelector(`section.day${j} .hourly-today-icon`).innerHTML += `<td><img src='https://openweathermap.org/img/wn/${list[i]['weather'][0]['icon']}@2x.png' alt='icon'/></td>`;
-              document.querySelector(`section.day${j} .hourly-today-description`).innerHTML += `<td>${list[i]['weather'][0]['description']}</td>`;
-              document.querySelector(`section.day${j} .hourly-today-temp`).innerHTML += `<td>${Math.round(list[i]['main']['temp'])}&deg;</td>`;
-              document.querySelector(`section.day${j} .hourly-today-feel`).innerHTML += `<td>${Math.round(list[i]['main']['feels_like'])}&deg;</td>`;
-              document.querySelector(`section.day${j} .hourly-today-wind`).innerHTML += `<td>${Math.round(list[i]['wind']['speed'])}</td>`;
-              document.querySelector(`section.day${j} .hourly-today-degrees`).innerHTML += `<td>${windDeg(list[i]['wind']['deg'])}</td>`;
-              document.querySelector(`section.day${j} .hourly-today-wind_gust`).innerHTML += `<td>${list[i]['wind']['gust']}</td>`;
-              document.querySelector(`section.day${j} .hourly-today-humidity`).innerHTML += `<td>${list[i]['main']['humidity']}%</td>`;
-              document.querySelector(`section.day${j} .hourly-today-pressure`).innerHTML += `<td>${Math.floor((list[i]['main']['pressure'] * 0.75006156) * 100) / 100}</td>`;
-              document.querySelector(`section.day${j} .hourly-today-visibility`).innerHTML += `<td>${list[i]['visibility'] / 1000}</td>`;
-            }
-          }
-        }
-      }*/
-
     let trunc = (t) => Math.trunc(t / 1000);
     const endToday = day.setHours(23, 0, 0);
     const startDay1 = trunc(endToday + 10800000);
@@ -354,7 +321,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const startDay5 = trunc((endDay4 * 1000) + 10800000);
     const endDay5 = trunc((endDay4 * 1000) + 86400000);
 
-    //todo: fix and refactor
     for (let i = 0; i < list.length; i++) {
       if (list[i]['dt'] >= startDay1 && list[i]['dt'] <= endDay1) {
         document.querySelector(`section.day1 .hourly-today-hour`).innerHTML += `<td>${timestampConversation(list[i]['dt'])}</td>`;
