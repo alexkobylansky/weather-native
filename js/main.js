@@ -246,9 +246,9 @@ document.addEventListener('DOMContentLoaded', () => {
   function renderCurrentWeather({weather, main, visibility, name, sys}) {
     function createIcon() {
       const link = document.createElement('link');
-      link.rel = `icon`
-      link.href = `https://openweathermap.org/img/wn/${weather[0]['icon']}.png`
-      document.head.append(link)
+      link.rel = 'icon';
+      link.href = `https://openweathermap.org/img/wn/${weather[0]['icon']}.png`;
+      document.head.append(link);
     }
 
     createIcon();
