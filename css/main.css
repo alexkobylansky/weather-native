@@ -83,7 +83,7 @@ header .col-md-7 {
 	position: relative;
 }
 .search input {
-	width: 100%;
+	width: 300px;
 	padding: 5px 10px 5px 40px;
 }
 .search .icon {
