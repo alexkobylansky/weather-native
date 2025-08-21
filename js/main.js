@@ -424,9 +424,9 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.hourly .hourly-today-pressure').innerHTML = '<th>Давление (mmHg)</th>';
     document.querySelector('.hourly .hourly-today-visibility').innerHTML = '<th>Видимость (км)</th>';
 
-    let a = day.setHours(23, 0, 0);
-    let b = a + 25200000;
-    let c = Math.trunc(b / 1000)
+    const todayAt23 = day.setHours(23, 0, 0);
+    const tomorrowAt6 = todayAt23 + 25200000;
+    const timestampSeconds = Math.trunc(tomorrowAt6 / 1000);
 
     for (let i = 0; i < hourly.length; i++) {
       document.querySelector('.hourly .hourly-today-hour').innerHTML += `<td>${timestampConversation(hourly[i]['dt'])}</td>`;
@@ -441,7 +441,7 @@ document.addEventListener('DOMContentLoaded', () => {
       document.querySelector('.hourly .hourly-today-humidity').innerHTML += `<td>${hourly[i]['humidity']}%</td>`;
       document.querySelector('.hourly .hourly-today-pressure').innerHTML += `<td>${Math.floor((hourly[i]['pressure'] * 0.75006156) * 100) / 100}</td>`;
       document.querySelector('.hourly .hourly-today-visibility').innerHTML += `<td>${hourly[i]['visibility'] / 1000}</td>`;
-      if (hourly[i]['dt'] === c) break
+      if (hourly[i]['dt'] === timestampSeconds) break
     }
 
     for (let i = 1; i <= 5; i++) {
