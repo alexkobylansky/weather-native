@@ -29,6 +29,21 @@ document.addEventListener('DOMContentLoaded', () => {
   // const dayEng = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   // const dayEnglish = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
+  (function () {
+    let lat = 50.4497115;
+    let lon = 30.5235707;
+    navigator.geolocation.getCurrentPosition(function (geoPosition) {
+        let lat = geoPosition ? geoPosition.coords.latitude : 50.4497115;
+        let lon = geoPosition ? geoPosition.coords.longitude : 30.5235707;
+        getPosition(lat, lon);
+      },
+      function (error) {
+        console.log(error);
+        getPosition(lat, lon);
+      }
+    );
+  })();
+
 
   function timestampConversation(t) {
     const now = getDay(t * 1000);
@@ -75,21 +90,6 @@ document.addEventListener('DOMContentLoaded', () => {
     loadScript('https://maps.googleapis.com/maps/api/js?key={key}&libraries=places&callback=initMap', initMap, lat, lon);
     hidePreloader()
   }
-
-  (function () {
-    let lat = 50.4497115;
-    let lon = 30.5235707;
-    navigator.geolocation.getCurrentPosition(function (geoPosition) {
-        let lat = geoPosition ? geoPosition.coords.latitude : 50.4497115;
-        let lon = geoPosition ? geoPosition.coords.longitude : 30.5235707;
-        getPosition(lat, lon);
-      },
-      function (error) {
-        console.log(error);
-        getPosition(lat, lon);
-      }
-    );
-  })();
 
   function loadScript(src, initMap, lat, lon) {
     let script = document.createElement('script');
