@@ -110,9 +110,10 @@ document.addEventListener('DOMContentLoaded', () => {
   async function initMap(lat, lon) {
     const center = {lat: lat, lng: lon};
 
-    const [{Map}, {AdvancedMarkerElement}] = await Promise.all([
+    const [{Map}, {AdvancedMarkerElement}, {PlaceAutocompleteElement}] = await Promise.all([
       google.maps.importLibrary('maps'),
-      google.maps.importLibrary('marker')
+      google.maps.importLibrary('marker'),
+      google.maps.importLibrary('places')
     ]);
 
     const map = await new Map(document.getElementById('map'), {
@@ -173,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    const placeAutocomplete = await new google.maps.places.PlaceAutocompleteElement();
+    const placeAutocomplete = await new PlaceAutocompleteElement();
     placeAutocomplete.id = 'place-autocomplete-input';
     const wrap = document.getElementById('search');
     wrap.appendChild(placeAutocomplete);
