@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const baseURL = 'https://api.openweathermap.org/data';
 
-  const day = new Date();
+  const currentDate = new Date();
   let getDay = time => new Date(time);
 
   const monthsRus = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
@@ -65,9 +65,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function getFullDay() {
-    let dd = String(day.getDate()).padStart(2, '0');
-    let mm = String(day.getMonth() + 1).padStart(2, '0');
-    const yyyy = day.getFullYear();
+    let dd = String(currentDate.getDate()).padStart(2, '0');
+    let mm = String(currentDate.getMonth() + 1).padStart(2, '0');
+    const yyyy = currentDate.getFullYear();
     return `${dd}.${mm}.${yyyy}`;
   }
 
@@ -309,7 +309,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     let trunc = (t) => Math.trunc(t / 1000);
-    const endToday = day.setHours(23, 0, 0);
+    const endToday = currentDate.setHours(23, 0, 0);
     const startDay1 = trunc(endToday + 10800000);
     const endDay1 = trunc(endToday + 86400000);
     const startDay2 = trunc((endDay1 * 1000) + 10800000);
@@ -424,7 +424,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.hourly .hourly-today-pressure').innerHTML = '<th>Давление (mmHg)</th>';
     document.querySelector('.hourly .hourly-today-visibility').innerHTML = '<th>Видимость (км)</th>';
 
-    const todayAt23 = day.setHours(23, 0, 0);
+    const todayAt23 = currentDate.setHours(23, 0, 0);
     const tomorrowAt6 = todayAt23 + 25200000;
     const timestampSeconds = Math.trunc(tomorrowAt6 / 1000);
 
