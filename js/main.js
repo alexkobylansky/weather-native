@@ -12,6 +12,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const baseURL = 'https://api.openweathermap.org/data';
 
+  const showToast = (status, text) => {
+    Toastify({
+      text: `HTTP Error: status: ${status}, ${text}`,
+      duration: 3000,
+      close: true,
+      gravity: 'top',
+      position: 'center',
+      style: {
+        background: '#ec6335',
+        color: 'white',
+      }
+    }).showToast();
+  };
+
   const currentDate = new Date();
   let getDay = time => new Date(time);
 
@@ -206,6 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const response = await fetch(url);
 
         if (!response.ok) {
+          showToast(response.status, response.statusText);
           throw new Error(`HTTP Error: ${response.status}, ${response.statusText}`);
         }
 
@@ -232,6 +247,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const response = await fetch(url);
 
       if (!response.ok) {
+        showToast(response.status, response.statusText);
         throw new Error(`HTTP Error: ${response.status}, ${response.statusText}`);
       }
 
@@ -284,6 +300,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const response = await fetch(url);
 
       if (!response.ok) {
+        showToast(response.status, response.statusText);
         throw new Error(`HTTP Error: ${response.status}, ${response.statusText}`);
       }
 
@@ -401,6 +418,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const response = await fetch(url);
 
       if (!response.ok) {
+        showToast(response.status, response.statusText);
         throw new Error(`HTTP Error: ${response.status}, ${response.statusText}`);
       }
 
