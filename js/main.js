@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }).showToast();
   };
 
-  const showError = (text) => {
+  const showWarning = (text) => {
     Toastify({
       text: `${text}`,
       duration: 3000,
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
       gravity: 'top',
       position: 'center',
       style: {
-        background: '#ec6335',
+        background: '#FFB300',
         color: 'white',
       }
     }).showToast();
@@ -179,11 +179,11 @@ document.addEventListener('DOMContentLoaded', () => {
             marker.position = pos;
           },
           () => {
-            showError('Ошибка: В вашем браузере отключена геолокация');
+            showWarning('Ошибка: В вашем браузере отключена геолокация');
           }
         );
       } else {
-        showError('Ошибка: Ваш браузер не поддерживает службу геолокации');
+        showWarning('Ошибка: Ваш браузер не поддерживает службу геолокации');
       }
     });
 
