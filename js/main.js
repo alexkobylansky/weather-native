@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
       lang: 'ru',
       appid: '2e3f0a4de66d0bcd26974266f439e301'
     };
-  }
+  };
 
   const baseURL = 'https://api.openweathermap.org/data';
 
