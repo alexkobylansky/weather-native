@@ -267,8 +267,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     createIcon();
-    const block = document.querySelector('.cityName');
-    block.querySelector('h2').innerHTML = `${name} Сейчас`;
+    document.querySelector('.cityName h2').textContent = `${name} Сейчас`;
 
     document.getElementById('rightNow-weather').innerHTML = (`
           <div class='col-md-8 current-weather-wrapp row'>
