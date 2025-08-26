@@ -26,6 +26,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }).showToast();
   };
 
+  const showError = (text) => {
+    Toastify({
+      text: `${text}`,
+      duration: 3000,
+      close: true,
+      gravity: 'top',
+      position: 'center',
+      style: {
+        background: '#ec6335',
+        color: 'white',
+      }
+    }).showToast();
+  };
+
   const currentDate = new Date();
   let getDay = time => new Date(time);
 
@@ -169,21 +183,11 @@ document.addEventListener('DOMContentLoaded', () => {
             marker.position = pos;
           },
           () => {
-            handleLocationError(true, infoWindow, map.getCenter());
+            showError('Ошибка: В вашем браузере отключена геолокация');
           }
         );
       } else {
-        handleLocationError(false, infoWindow, map.getCenter());
-      }
-
-      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-        infoWindow.setPosition(pos);
-        infoWindow.setContent(
-          browserHasGeolocation
-            ? 'Ошибка: В вашем браузере отключена геолокация'
-            : 'Ошибка: Ваш браузер не поддерживает службу геолокации'
-        );
-        infoWindow.open(map);
+        showError('Ошибка: Ваш браузер не поддерживает службу геолокации');
       }
     });
 
