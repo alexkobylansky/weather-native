@@ -225,8 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const currentWeather = await response.json();
-        const lat = currentWeather.coord.lat;
-        const lon = currentWeather.coord.lon;
+
         renderCurrentWeather(currentWeather);
         void getForecastWeather(lat, lon);
         void getOneCallAPI(lat, lon);
