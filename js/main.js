@@ -99,9 +99,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function getDuration(sunrise, sunset) {
-    let sunRise = getDay(sunrise);
-    let sunSet = getDay(sunset);
-    let different = sunSet - sunRise;
+    const sunRise = getDay(sunrise);
+    const sunSet = getDay(sunset);
+    const different = sunSet - sunRise;
     let hours = Math.floor((different % 86400) / 3600)
     let minutes = Math.ceil(((different % 86400) % 3600) / 60);
     if (minutes === 60) minutes -= 1;
