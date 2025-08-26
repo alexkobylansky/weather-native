@@ -328,16 +328,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let trunc = (t) => Math.trunc(t / 1000);
     const endToday = currentDate.setHours(23, 0, 0);
-    const startDay1 = trunc(endToday + 10800000);
-    const endDay1 = trunc(endToday + 86400000);
-    const startDay2 = trunc((endDay1 * 1000) + 10800000);
-    const endDay2 = trunc((endDay1 * 1000) + 86400000);
-    const startDay3 = trunc((endDay2 * 1000) + 10800000);
-    const endDay3 = trunc((endDay2 * 1000) + 86400000);
-    const startDay4 = trunc((endDay3 * 1000) + 10800000);
-    const endDay4 = trunc((endDay3 * 1000) + 86400000);
-    const startDay5 = trunc((endDay4 * 1000) + 10800000);
-    const endDay5 = trunc((endDay4 * 1000) + 86400000);
+    const MS_IN_DAY = 86400000; // 24 часа
+    const MS_IN_3_HOURS = 10800000; // 3 часа
+
+    const startDay1 = trunc(endToday + MS_IN_3_HOURS);
+    const endDay1 = trunc(endToday + MS_IN_DAY);
+    const startDay2 = trunc((endDay1 * 1000) + MS_IN_3_HOURS);
+    const endDay2 = trunc((endDay1 * 1000) + MS_IN_DAY);
+    const startDay3 = trunc((endDay2 * 1000) + MS_IN_3_HOURS);
+    const endDay3 = trunc((endDay2 * 1000) + MS_IN_DAY);
+    const startDay4 = trunc((endDay3 * 1000) + MS_IN_3_HOURS);
+    const endDay4 = trunc((endDay3 * 1000) + MS_IN_DAY);
+    const startDay5 = trunc((endDay4 * 1000) + MS_IN_3_HOURS);
+    const endDay5 = trunc((endDay4 * 1000) + MS_IN_DAY);
 
     for (let i = 0; i < list.length; i++) {
       if (list[i]['dt'] >= startDay1 && list[i]['dt'] <= endDay1) {
