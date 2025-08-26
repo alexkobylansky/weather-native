@@ -72,7 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
     );
   })();
 
-
   function timestampConversation(t) {
     const now = getDay(t * 1000);
     let hour = now.getHours();
@@ -163,10 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
       position: center
     });
 
-    const infoWindow = await new google.maps.InfoWindow({});
-
     const locationButton = document.createElement('button');
-
     locationButton.textContent = 'Ваше местоположение';
     locationButton.classList.add('custom-map-control-button');
     map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
