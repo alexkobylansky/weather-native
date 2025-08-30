@@ -110,11 +110,11 @@ document.addEventListener('DOMContentLoaded', () => {
     return `${hours} ч ${minutes} мин`;
   }
 
-  function getPosition(lat, lon) {
-    void getCurrentWeather(lat, lon);
-    void getForecastWeather(lat, lon);
-    void getOneCallAPI(lat, lon);
-    void initMap(lat, lon);
+  async function getPosition(lat, lon) {
+    await getCurrentWeather(lat, lon);
+    await getForecastWeather(lat, lon);
+    await getOneCallAPI(lat, lon);
+    await initMap(lat, lon);
     hidePreloader();
   }
 
