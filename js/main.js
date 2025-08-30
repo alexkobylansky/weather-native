@@ -326,7 +326,7 @@ document.addEventListener('DOMContentLoaded', () => {
       document.querySelector(`section.day${i} .hourly-today-visibility`).innerHTML = '<th>Видимость (км)</th>';
     }
 
-    let trunc = (t) => Math.trunc(t / 1000);
+    const trunc = (t) => Math.trunc(t / 1000);
     const endToday = currentDate.setHours(23, 0, 0);
     const MS_IN_DAY = 86400000; // 24 часа
     const MS_IN_3_HOURS = 10800000; // 3 часа
