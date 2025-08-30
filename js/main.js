@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   let windDeg = (deg) => {
-    if (deg >= 0 || deg <= 22.5 && deg >= 337.5 || deg <= 360) return 'северный'
+    if ((deg >= 0 && deg <= 22.5) || (deg >= 337.5 && deg <= 360)) return 'северный'
     else if (deg >= 22.6 || deg <= 67.5) return 'северо-восточный'
     else if (deg >= 67.6 || deg <= 112.5) return 'восточный'
     else if (deg >= 112.6 || deg <= 157.5) return 'юго-восточный'
