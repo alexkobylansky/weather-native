@@ -226,6 +226,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const currentWeather = await response.json();
 
+        currentWeather.name = await getPlace(lat, lon);
+
         renderCurrentWeather(currentWeather);
         void getForecastWeather(lat, lon);
         void getOneCallAPI(lat, lon);
@@ -235,6 +237,30 @@ document.addEventListener('DOMContentLoaded', () => {
       } finally {
         hidePreloader();
       }
+    }
+  }
+
+  async function getPlace(lat, lon) {
+    const params = new URLSearchParams({
+      latlng: `${lat},${lon}`,
+      language: 'ru',
+      key: 'AIzaSyBP6TTt_WvIbUp5gx0n5niy6wyC175FUhs'
+    });
+    const url = `https://maps.googleapis.com/maps/api/geocode/json?${params}`;
+
+    try {
+      const response = await fetch(url);
+
+      if (!response.ok) {
+        throw new Error(`HTTP Error: ${response.status}, ${response.statusText}`);
+      }
+
+      const place = await response.json();
+
+      return place.results[0].address_components[2].long_name;
+    } catch (error) {
+      console.error('Fetch error:', error.message);
+      throw error;
     }
   }
 
@@ -251,6 +277,9 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       const currentWeather = await response.json();
+
+      currentWeather.name = await getPlace(lat, lon);
+
       renderCurrentWeather(currentWeather);
     } catch (error) {
       console.error('Fetch error:', error.message);
