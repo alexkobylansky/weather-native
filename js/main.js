@@ -189,6 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const placeAutocomplete = await new PlaceAutocompleteElement();
     placeAutocomplete.id = 'place-autocomplete-input';
+    placeAutocomplete.style.colorScheme = 'none';
     const wrap = document.getElementById('search');
     const gmpPlaceAutocomplete = document.getElementById('place-autocomplete-input');
 
