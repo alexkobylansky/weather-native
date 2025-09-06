@@ -258,11 +258,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const place = await response.json();
 
-      const component = place.results[0].address_components.find((component) =>
+      let component = place.results[0].address_components.find((component) =>
         component.types.includes("locality")
       );
 
-      return component.long_name
+      if (!component?.long_name) {
+        component = place.results[0].address_components.find((component) =>
+          component.types.includes("political")
+        );
+      }
+
+      return component?.long_name ?? ''
     } catch (error) {
       console.error('Fetch error:', error.message);
       throw error;
