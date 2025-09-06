@@ -258,7 +258,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const place = await response.json();
 
-      return place.results[0].address_components[2].long_name;
+      const component = place.results[0].address_components.find((component) =>
+        component.types.includes("locality")
+      );
+
+      return component.long_name
     } catch (error) {
       console.error('Fetch error:', error.message);
       throw error;
